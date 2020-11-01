@@ -1,13 +1,114 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Barlow Semi Condensed', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.welcome-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #CEDFD9;
+  background-color: #B09398;
+  font-family: 'Ribeye Marrow', cursive;
+}
+
+button {
+  font-weight: 600;
+  background-color: #5F5449;
+  border-radius: 5px;
+  font-size: 14px;
+  color: white;
+  padding: 7px;
+  cursor: pointer;
+  border: none;
+}
+
+button:hover {
+  box-shadow: 0 0 1px 1px #5F5449;
+}
+
+.question-area {
+  height: 100vh;
+  background-color: #B09398;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.question-card {
+  width: 50%;
+  height: 50%;
+}
+
+.question-card-inner {
+  height: 100%;
+  width: 100%;
+  transition: transform 0.8s
+}
+
+.flip {
+  transition: transform 0.8s;
+  transform: rotateY(180deg);
+}
+
+.question-card-front {
+  border: 1px solid #5F5449;
+  background-color: #CEDFD9;
+  border-radius: 10px;
+  padding: 50px;
+  text-align: center;
+  color: #5F5449;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  box-shadow: 12px 12px 2px 1px #5F5449;
+  backface-visibility: hidden;
+}
+
+.question-card-front h2 {
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.question-card-front h3 {
+  margin: 0;
+  margin-bottom: 30px;
+}
+
+.question-card-front p {
+  margin: 0;
+}
+
+.choices h4 {
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.choices {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.choices button {
+  width: 100px;
+  margin: 5px;
+}
+
+.question-card-back {
+  border: 1px solid #5F5449;
+  background-color: #CEDFD9;
+  border-radius: 10px;
+  padding: 50px;
+  text-align: center;
+  color: #5F5449;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  box-shadow: 12px 12px 2px 1px #5F5449;
+  transform: rotateY(180deg);
 }

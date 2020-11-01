@@ -34,8 +34,7 @@ class Trivia extends React.Component {
         
         {this.state.currentPage === "question round" ?  <QuestionRounds changePage={this.changePage} updateScore={this.updateScore} /> : null}
 
-        {this.state.currentPage === "end round" ? <EndRound score={this.state.score} changePage={this.changePage} /> : null}
-        
+        {this.state.currentPage === "end round" ? <EndRound score={this.state.score} changePage={this.changePage} /> : null}       
       </div>
     )
   }

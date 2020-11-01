@@ -4,7 +4,12 @@ class QuestionCard extends React.Component {
 
   state = {
     display: "front",
-    correct: true
+    correct: true,
+    flip: false
+  }
+
+  componentDidMount() {
+    this.setState({ flip: false })
   }
 
   renderChoices = () => {
@@ -16,19 +21,18 @@ class QuestionCard extends React.Component {
   }
 
   displayAnswer = (choice) => {
-    // console.log(choice, this.props.answer)
-    this.setState({
-      display: "back"
-    })
-    // flip card
+    this.setState({ flip: true })
+
+    setTimeout(() => {
+      this.setState({ display: "back" })
+    }, 200)
+
     if (choice !== this.props.answer) {
-      // console.log("Wrong!")
       this.props.updateScore(false)
       this.setState({
         correct: false
       })
     } else {
-      // console.log("Correct!")
       this.props.updateScore(true)
       this.setState({
         correct: true
@@ -58,22 +62,31 @@ class QuestionCard extends React.Component {
 
   render() {
     return (
-      <div>
-        { this.state.display === "front" ? 
-          <div>
-            <h1>Question {this.props.questionNumber}:</h1>
-            <h2>{this.props.question}</h2>
-            <h3>Choose Your Answer</h3>
-            <div>
-              {this.renderChoices()}
-            </div>
-          </div> 
-        :
-          <div>
-            {this.displayBack()}
-          </div> 
-        }
-        
+      <div className="question-area">
+        <div className="question-card">
+          <div 
+          className={this.state.flip ? "question-card-inner, flip" : "question-card-inner" }
+          >
+            { this.state.display === "front" ? 
+              <div className="question-card-front">
+                <div>
+                  <h2>Question {this.props.questionNumber}</h2>
+                  <h3>{this.props.question}</h3>
+                </div>            
+                <div className="choices">
+                  <h4>Choose Your Answer:</h4>
+                  <div>
+                    {this.renderChoices()}
+                  </div>
+                </div>
+              </div> 
+            :
+              <div className="question-card-back">
+                {this.displayBack()}
+              </div> 
+            }       
+          </div>
+        </div> 
       </div>
     )
   }

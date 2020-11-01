@@ -71,9 +71,9 @@ class QuestionRounds extends React.Component {
       return null
     }
     return (
-      <div>
+      <>
         {this.renderQuestionCards()}
-      </div>
+      </>
     )
   }
 }
