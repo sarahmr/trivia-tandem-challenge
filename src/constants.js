@@ -1,0 +1,10 @@
+export const PAGES = { 
+  END_GAME: "END_GAME",
+  QUESTION_ROUND: "QUESTION_ROUND",
+  START_GAME: "START_GAME"
+}
+
+export const CARD_DISPLAY = {
+  FRONT: "FRONT",
+  BACK: "BACK"
+}

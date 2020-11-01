@@ -1,18 +1,19 @@
 import React from 'react'
 import QuestionCard from './QuestionCard'
 import QuestionData from './Apprentice_TandemFor400_Data.json'
+import { PAGES } from './constants'
 
 class QuestionRounds extends React.Component {
 
   state = {
     triviaQuestions: [],
-    questionNumber: 1
+    questionNumber: 0
   }
 
   componentDidMount() {
     this.questionCollection()
     this.setState({
-      questionNumber: 1
+      questionNumber: 0
     })
   }
 
@@ -21,7 +22,7 @@ class QuestionRounds extends React.Component {
 
     let count = 0
     while (count < 10) {
-      let randomIndex = Math.floor((Math.random() * (QuestionData.length - 1)) + 1)
+      let randomIndex = Math.floor(Math.random() * QuestionData.length)
 
       if (!questionCollection.includes(QuestionData[randomIndex])) {      
         questionCollection.push(QuestionData[randomIndex])
@@ -34,46 +35,33 @@ class QuestionRounds extends React.Component {
     })
   }
 
-  renderQuestionCards = () => {
-
-    // render question at index 0
-    // select an answer
-    // flip card
-    // click next and go to next card
-
-    // console.log(this.state.questionNumber - 1, this.state.triviaQuestions[(this.state.questionNumber - 1)])
-    return (
-      <QuestionCard 
-      questionNumber={this.state.questionNumber}
-      key={this.state.triviaQuestions[this.state.questionNumber - 1]["question-number"]} 
-      question={this.state.triviaQuestions[this.state.questionNumber - 1].question}
-      answer={this.state.triviaQuestions[this.state.questionNumber - 1].correct}
-      incorrect={this.state.triviaQuestions[this.state.questionNumber - 1].incorrect} 
-      nextCard={this.nextCard}
-      updateScore={this.props.updateScore}
-    />
-    )  
-  }
-
   nextCard = () => {
     this.setState(prevState => {
       return { questionNumber: prevState.questionNumber + 1 }
     }, () => {
-      console.log(this.state.questionNumber)
-      if (this.state.questionNumber > 10) {
-        this.props.changePage("end round")
+      if (this.state.questionNumber > 9) {
+        this.props.changePage(PAGES.END_GAME)
       }
     })
   }
 
   render() {
-    if (this.state.triviaQuestions.length === 0 || this.state.questionNumber > 10) {
+    let {questionNumber, triviaQuestions} = this.state
+
+    if (triviaQuestions.length === 0 || questionNumber > triviaQuestions.length - 1) {
       return null
     }
+
     return (
-      <>
-        {this.renderQuestionCards()}
-      </>
+      <QuestionCard 
+        questionNumber={questionNumber}
+        key={triviaQuestions[questionNumber]["question-number"]} 
+        question={triviaQuestions[questionNumber].question}
+        answer={triviaQuestions[questionNumber].correct}
+        incorrect={triviaQuestions[questionNumber].incorrect} 
+        nextCard={this.nextCard}
+        updateScore={this.props.updateScore}
+      />
     )
   }
 }
